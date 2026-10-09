@@ -50,7 +50,7 @@ sl.max=last;sl.value=0;const show=i=>{d3.select("#t2").text("Over time: "+fmt(i)
 sl.oninput=()=>show(+sl.value);let tm=null;
 play.onclick=()=>{if(tm){clearInterval(tm);tm=null;play.textContent="▶ Play";return}
  play.textContent="⏸ Pause";if(+sl.value>=last)show(0);
- tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},1600)};
+ tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},800)};
 
 const lg = d3.select("#lg");
 const g = lg.append("defs")
