@@ -60,5 +60,7 @@ if __name__ == "__main__":
     if a[:1] == ["--inspect"]: inspect(a[1])
     else:
         if a[:1] == ["--download"]:
-            a = ["/tmp/report.txt"]; urllib.request.urlretrieve(URL, a[0])
+            a = ["/tmp/report.txt"]
+            req = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36", "Accept": "*/*"})
+            with urllib.request.urlopen(req, timeout=120) as r, open(a[0], "wb") as f: f.write(r.read())
         aggregate(a[0])
