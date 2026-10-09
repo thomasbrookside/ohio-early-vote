@@ -50,10 +50,59 @@ sl.oninput=()=>show(+sl.value);let tm=null;
 play.onclick=()=>{if(tm){clearInterval(tm);tm=null;play.textContent="▶ Play";return}
  play.textContent="⏸ Pause";if(+sl.value>=last)show(0);
  tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},800)};
-const lg=d3.select("#lg"),g=lg.append("defs").append("linearGradient").attr("id","gr");
-d3.range(0,1.01,.1).forEach(t=>g.append("stop").attr("offset",t).attr("stop-color",d3.interpolateRdBu(t)));
-lg.append("rect").attr("x",20).attr("y",4).attr("width",380).attr("height",12).attr("fill","url(#gr)");
-[["More Democratic",20,"start"],["No change",210,"middle"],["More Republican",400,"end"]].forEach(([t,x,a])=>lg.append("text").attr("x",x).attr("y",34).attr("text-anchor",a).attr("font-size",12).text(t));
-lg.append("text").attr("x",20).attr("y",28).attr("font-size",10).text(`−${MAX}`);lg.append("text").attr("x",400).attr("y",28).attr("text-anchor","end").attr("font-size",10).text(`+${MAX}`);
-})();
+
+const lg = d3.select("#lg");
+const g = lg.append("defs")
+  .append("linearGradient")
+  .attr("id", "gr");
+
+d3.range(0, 1.001, 0.025).forEach(t => {
+  const s = MIN_SHIFT + t * (MAX_SHIFT - MIN_SHIFT);
+  g.append("stop")
+    .attr("offset", `${t * 100}%`)
+    .attr("stop-color", col(s));
+});
+
+lg.append("rect")
+  .attr("x", 20)
+  .attr("y", 4)
+  .attr("width", 380)
+  .attr("height", 12)
+  .attr("fill", "url(#gr)");
+
+const zeroX = 20 + 380 * (-MIN_SHIFT) /
+  (MAX_SHIFT - MIN_SHIFT);
+
+[
+  ["More Democratic", 20, "start"],
+  ["No change", zeroX, "middle"],
+  ["More Republican", 400, "end"]
+].forEach(([t, x, a]) =>
+  lg.append("text")
+    .attr("x", x)
+    .attr("y", 34)
+    .attr("text-anchor", a)
+    .attr("font-size", 12)
+    .text(t)
+);
+
+lg.append("text")
+  .attr("x", 20)
+  .attr("y", 28)
+  .attr("font-size", 10)
+  .text("−35");
+
+lg.append("text")
+  .attr("x", zeroX)
+  .attr("y", 28)
+  .attr("text-anchor", "middle")
+  .attr("font-size", 10)
+  .text("0");
+
+lg.append("text")
+  .attr("x", 400)
+  .attr("y", 28)
+  .attr("text-anchor", "end")
+  .attr("font-size", 10)
+  .text("+10");
 </script></body></html>
