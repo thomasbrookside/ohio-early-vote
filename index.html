@@ -50,7 +50,7 @@ sl.max=last;sl.value=0;const show=i=>{d3.select("#t2").text("Over time: "+fmt(i)
 sl.oninput=()=>show(+sl.value);let tm=null;
 play.onclick=()=>{if(tm){clearInterval(tm);tm=null;play.textContent="▶ Play";return}
  play.textContent="⏸ Pause";if(+sl.value>=last)show(0);
- tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},800)};
+ tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},1600)};
 
 const lg = d3.select("#lg");
 const g = lg.append("defs")
@@ -74,18 +74,7 @@ lg.append("rect")
 const zeroX = 20 + 380 * (-MIN_SHIFT) /
   (MAX_SHIFT - MIN_SHIFT);
 
-[
-  ["More Democratic", 20, "start"],
-  ["No change", zeroX, "middle"],
-  ["More Republican", 400, "end"]
-].forEach(([t, x, a]) =>
-  lg.append("text")
-    .attr("x", x)
-    .attr("y", 34)
-    .attr("text-anchor", a)
-    .attr("font-size", 12)
-    .text(t)
-);
+
 
 lg.append("text")
   .attr("x", 20)
