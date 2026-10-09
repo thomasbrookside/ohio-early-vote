@@ -13,8 +13,20 @@ h2{font-size:1.05em;margin:.2em 0}#tip{position:fixed;pointer-events:none;backgr
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script>
-const MAX=10, MIN_TOTAL=100;  // color scale = ±MAX points; counties with fewer than MIN_TOTAL R+D ballots show gray
-const col=s=>s==null?"#ddd":d3.interpolateRdBu(0.5-Math.max(-1,Math.min(1,s/MAX))/2);
+
+const MIN_SHIFT = -35;
+const MAX_SHIFT = 10;
+const MIN_TOTAL = 100;
+
+const col = s => {
+  if (s == null) return "#ddd";
+
+  const t = s < 0
+    ? 0.5 + 0.5 * Math.min(1, -s / -MIN_SHIFT)
+    : 0.5 - 0.5 * Math.min(1, s / MAX_SHIFT);
+
+  return d3.interpolateRdBu(t);
+};
 const tip=d3.select("#tip");
 (async()=>{
 const [us,base,ts]=await Promise.all([d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json"),
