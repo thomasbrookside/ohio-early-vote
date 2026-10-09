@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 ohio-early-vote/scripts/aggregate.py --download
+      - run: python3 scripts/aggregate.py --download
       - run: |
           git config user.name "github-actions"; git config user.email "actions@github.com"
-          git add ohio-early-vote/data
+          git add data
           git diff --cached --quiet || (git commit -m "Update early vote snapshot" && git push)
