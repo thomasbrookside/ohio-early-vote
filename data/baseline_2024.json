@@ -1,0 +1,445 @@
+{
+ "label": "2024 general (final)",
+ "counties": {
+  "Adams": {
+   "gop": 3693,
+   "dem": 522,
+   "una": 2741
+  },
+  "Allen": {
+   "gop": 7139,
+   "dem": 2191,
+   "una": 9379
+  },
+  "Ashland": {
+   "gop": 5846,
+   "dem": 1170,
+   "una": 6557
+  },
+  "Ashtabula": {
+   "gop": 5063,
+   "dem": 2795,
+   "una": 8511
+  },
+  "Athens": {
+   "gop": 1745,
+   "dem": 3315,
+   "una": 6577
+  },
+  "Auglaize": {
+   "gop": 4650,
+   "dem": 649,
+   "una": 5934
+  },
+  "Belmont": {
+   "gop": 5443,
+   "dem": 2254,
+   "una": 7691
+  },
+  "Brown": {
+   "gop": 4019,
+   "dem": 728,
+   "una": 4893
+  },
+  "Butler": {
+   "gop": 25845,
+   "dem": 8999,
+   "una": 51419
+  },
+  "Carroll": {
+   "gop": 2144,
+   "dem": 616,
+   "una": 2862
+  },
+  "Champaign": {
+   "gop": 4304,
+   "dem": 981,
+   "una": 5195
+  },
+  "Clark": {
+   "gop": 10052,
+   "dem": 4690,
+   "una": 15239
+  },
+  "Clermont": {
+   "gop": 15464,
+   "dem": 4076,
+   "una": 28767
+  },
+  "Clinton": {
+   "gop": 4488,
+   "dem": 714,
+   "una": 4855
+  },
+  "Columbiana": {
+   "gop": 7050,
+   "dem": 2069,
+   "una": 9290
+  },
+  "Coshocton": {
+   "gop": 4172,
+   "dem": 937,
+   "una": 3870
+  },
+  "Crawford": {
+   "gop": 3367,
+   "dem": 739,
+   "una": 5409
+  },
+  "Cuyahoga": {
+   "gop": 36418,
+   "dem": 74093,
+   "una": 118098
+  },
+  "Darke": {
+   "gop": 5916,
+   "dem": 884,
+   "una": 6110
+  },
+  "Defiance": {
+   "gop": 3566,
+   "dem": 1219,
+   "una": 5633
+  },
+  "Delaware": {
+   "gop": 20221,
+   "dem": 9886,
+   "una": 38026
+  },
+  "Erie": {
+   "gop": 5091,
+   "dem": 3214,
+   "una": 11435
+  },
+  "Fairfield": {
+   "gop": 12724,
+   "dem": 4505,
+   "una": 24685
+  },
+  "Fayette": {
+   "gop": 2242,
+   "dem": 475,
+   "una": 3162
+  },
+  "Franklin": {
+   "gop": 37718,
+   "dem": 57290,
+   "una": 159006
+  },
+  "Fulton": {
+   "gop": 3939,
+   "dem": 1121,
+   "una": 5020
+  },
+  "Gallia": {
+   "gop": 2998,
+   "dem": 501,
+   "una": 2737
+  },
+  "Geauga": {
+   "gop": 9674,
+   "dem": 3306,
+   "una": 13755
+  },
+  "Greene": {
+   "gop": 16619,
+   "dem": 6445,
+   "una": 27124
+  },
+  "Guernsey": {
+   "gop": 2836,
+   "dem": 825,
+   "una": 4180
+  },
+  "Hamilton": {
+   "gop": 30545,
+   "dem": 33712,
+   "una": 104824
+  },
+  "Hancock": {
+   "gop": 8459,
+   "dem": 1769,
+   "una": 9336
+  },
+  "Hardin": {
+   "gop": 2485,
+   "dem": 506,
+   "una": 2863
+  },
+  "Harrison": {
+   "gop": 1121,
+   "dem": 380,
+   "una": 1304
+  },
+  "Henry": {
+   "gop": 3360,
+   "dem": 838,
+   "una": 3230
+  },
+  "Highland": {
+   "gop": 3888,
+   "dem": 615,
+   "una": 4899
+  },
+  "Hocking": {
+   "gop": 2753,
+   "dem": 1035,
+   "una": 3902
+  },
+  "Holmes": {
+   "gop": 2597,
+   "dem": 399,
+   "una": 3271
+  },
+  "Huron": {
+   "gop": 3991,
+   "dem": 1457,
+   "una": 7013
+  },
+  "Jackson": {
+   "gop": 2905,
+   "dem": 525,
+   "una": 5253
+  },
+  "Jefferson": {
+   "gop": 4345,
+   "dem": 2381,
+   "una": 7572
+  },
+  "Knox": {
+   "gop": 7285,
+   "dem": 1665,
+   "una": 8278
+  },
+  "Lake": {
+   "gop": 17070,
+   "dem": 9252,
+   "una": 33940
+  },
+  "Lawrence": {
+   "gop": 3923,
+   "dem": 971,
+   "una": 5694
+  },
+  "Licking": {
+   "gop": 15293,
+   "dem": 5783,
+   "una": 27652
+  },
+  "Logan": {
+   "gop": 6586,
+   "dem": 1065,
+   "una": 8465
+  },
+  "Lorain": {
+   "gop": 17241,
+   "dem": 16039,
+   "una": 40736
+  },
+  "Lucas": {
+   "gop": 14549,
+   "dem": 18960,
+   "una": 49685
+  },
+  "Madison": {
+   "gop": 4204,
+   "dem": 908,
+   "una": 5668
+  },
+  "Mahoning": {
+   "gop": 11869,
+   "dem": 12553,
+   "una": 25642
+  },
+  "Marion": {
+   "gop": 5385,
+   "dem": 1829,
+   "una": 8056
+  },
+  "Medina": {
+   "gop": 17915,
+   "dem": 8265,
+   "una": 30309
+  },
+  "Meigs": {
+   "gop": 1800,
+   "dem": 379,
+   "una": 2356
+  },
+  "Mercer": {
+   "gop": 6084,
+   "dem": 931,
+   "una": 6076
+  },
+  "Miami": {
+   "gop": 12026,
+   "dem": 2676,
+   "una": 16598
+  },
+  "Monroe": {
+   "gop": 1058,
+   "dem": 530,
+   "una": 1691
+  },
+  "Montgomery": {
+   "gop": 24049,
+   "dem": 23711,
+   "una": 57864
+  },
+  "Morgan": {
+   "gop": 1785,
+   "dem": 356,
+   "una": 1429
+  },
+  "Morrow": {
+   "gop": 3753,
+   "dem": 793,
+   "una": 3950
+  },
+  "Muskingum": {
+   "gop": 6373,
+   "dem": 1980,
+   "una": 11421
+  },
+  "Noble": {
+   "gop": 1400,
+   "dem": 317,
+   "una": 1458
+  },
+  "Ottawa": {
+   "gop": 3315,
+   "dem": 1615,
+   "una": 6330
+  },
+  "Paulding": {
+   "gop": 1749,
+   "dem": 392,
+   "una": 2618
+  },
+  "Perry": {
+   "gop": 3187,
+   "dem": 787,
+   "una": 3840
+  },
+  "Pickaway": {
+   "gop": 5746,
+   "dem": 1416,
+   "una": 5954
+  },
+  "Pike": {
+   "gop": 1886,
+   "dem": 616,
+   "una": 4320
+  },
+  "Portage": {
+   "gop": 9093,
+   "dem": 6408,
+   "una": 18502
+  },
+  "Preble": {
+   "gop": 3771,
+   "dem": 626,
+   "una": 4713
+  },
+  "Putnam": {
+   "gop": 4549,
+   "dem": 535,
+   "una": 4980
+  },
+  "Richland": {
+   "gop": 11202,
+   "dem": 3840,
+   "una": 15488
+  },
+  "Ross": {
+   "gop": 5314,
+   "dem": 2079,
+   "una": 9600
+  },
+  "Sandusky": {
+   "gop": 2611,
+   "dem": 1259,
+   "una": 7547
+  },
+  "Scioto": {
+   "gop": 4706,
+   "dem": 1440,
+   "una": 7599
+  },
+  "Seneca": {
+   "gop": 4295,
+   "dem": 1225,
+   "una": 4688
+  },
+  "Shelby": {
+   "gop": 5041,
+   "dem": 835,
+   "una": 6361
+  },
+  "Stark": {
+   "gop": 23366,
+   "dem": 13714,
+   "una": 40772
+  },
+  "Summit": {
+   "gop": 27209,
+   "dem": 20962,
+   "una": 61441
+  },
+  "Trumbull": {
+   "gop": 10639,
+   "dem": 11688,
+   "una": 19125
+  },
+  "Tuscarawas": {
+   "gop": 5158,
+   "dem": 2345,
+   "una": 10099
+  },
+  "Union": {
+   "gop": 7661,
+   "dem": 1880,
+   "una": 12941
+  },
+  "Van Wert": {
+   "gop": 3727,
+   "dem": 632,
+   "una": 4653
+  },
+  "Vinton": {
+   "gop": 1109,
+   "dem": 307,
+   "una": 1495
+  },
+  "Warren": {
+   "gop": 24785,
+   "dem": 7290,
+   "una": 44791
+  },
+  "Washington": {
+   "gop": 7724,
+   "dem": 1942,
+   "una": 8398
+  },
+  "Wayne": {
+   "gop": 9226,
+   "dem": 3067,
+   "una": 12540
+  },
+  "Williams": {
+   "gop": 3346,
+   "dem": 685,
+   "una": 4043
+  },
+  "Wood": {
+   "gop": 8838,
+   "dem": 5216,
+   "una": 17300
+  },
+  "Wyandot": {
+   "gop": 2232,
+   "dem": 508,
+   "una": 3274
+  }
+ }
+}

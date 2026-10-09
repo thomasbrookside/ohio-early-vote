@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ohio early vote: party shift vs. 2024</title>
+<style>body{font:15px system-ui,sans-serif;max-width:1100px;margin:1em auto;padding:0 1em;color:#222}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1em}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+svg{width:100%;height:auto}path{stroke:#fff;stroke-width:.6}path:hover{stroke:#000;stroke-width:1.5}
+h2{font-size:1.05em;margin:.2em 0}#tip{position:fixed;pointer-events:none;background:#fff;border:1px solid #888;padding:6px 8px;font-size:13px;display:none}
+.ctl{display:flex;gap:.6em;align-items:center}.ctl input{flex:1}.note{color:#666;font-size:13px}</style></head><body>
+<h1>Ohio early vote: Republican share vs. 2024</h1>
+<p class="note">Counties colored by change in Republican share of Republican + Democratic ballots (returned absentee + in-person early), cumulative total so far vs. the final 2024 total. Unaffiliated voters excluded. Early totals are partial and skew differently than the full electorate, so early shifts can fade as voting continues.</p>
+<div class="grid"><div><h2 id="t1"></h2><svg id="m1"></svg></div><div><h2 id="t2"></h2><svg id="m2"></svg>
+<div class="ctl"><button id="play">▶ Play</button><input id="sl" type="range" min="0" value="0"></div></div></div>
+<div style="max-width:420px;margin:1em auto"><svg id="lg" viewBox="0 0 420 40"></svg></div><div id="tip"></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+const MAX=10, MIN_TOTAL=100;  // color scale = ±MAX points; counties with fewer than MIN_TOTAL R+D ballots show gray
+const col=s=>s==null?"#ddd":d3.interpolateRdBu(0.5-Math.max(-1,Math.min(1,s/MAX))/2);
+const tip=d3.select("#tip");
+(async()=>{
+const [us,base,ts]=await Promise.all([d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json"),
+ d3.json("data/baseline_2024.json"),d3.json("data/timeseries.json")]);
+const dates=ts.dates,snaps=dates.map((d,i)=>({counties:Object.fromEntries(Object.entries(ts.counties).map(([n,c])=>[n,{gop:c.gop[i],dem:c.dem[i],una:c.una[i]}]))}));
+const feats=topojson.feature(us,us.objects.counties).features.filter(f=>String(f.id).startsWith("39"));
+const proj=d3.geoMercator().fitSize([500,500],{type:"FeatureCollection",features:feats}),path=d3.geoPath(proj);
+const p2=c=>c.gop+c.dem?c.gop/(c.gop+c.dem):null, B=base.counties;
+function shift(s,n){const c=s.counties[n],b=B[n];return !c||c.gop+c.dem<MIN_TOTAL?null:(p2(c)-p2(b))*100}
+function init(id){const svg=d3.select(id).attr("viewBox","0 0 500 500");
+ return svg.selectAll("path").data(feats).join("path").attr("d",path)
+ .on("mousemove",(e,f)=>{const i=id==="#m1"?snaps.length-1:+sl.value,s=snaps[i],n=f.properties.name,c=s.counties[n],b=B[n],x=shift(s,n);
+  tip.style("display","block").style("left",e.clientX+12+"px").style("top",e.clientY+12+"px").html(`<b>${n}</b><br>2024 GOP 2-party: ${(p2(b)*100).toFixed(1)}%<br>Now: ${c&&p2(c)!=null?(p2(c)*100).toFixed(1)+"%":"–"}<br>Shift: ${x==null?"insufficient data":(x>0?"+":"")+x.toFixed(1)+" pts"}<br>R ${c?.gop??0} · D ${c?.dem??0}`)})
+ .on("mouseleave",()=>tip.style("display","none"))}
+function paint(sel,i,t){const s=snaps[i];sel.transition().duration(t).attr("fill",f=>col(shift(s,f.properties.name)))}
+const sl=document.getElementById("sl"),fmt=i=>dates[i]+(i===snaps.length-1?" (file as of "+ts.asof.slice(0,16).replace("T"," ")+" UTC)":"");
+const m1=init("#m1"),m2=init("#m2"),last=snaps.length-1;
+d3.select("#t1").text("Current: "+fmt(last));paint(m1,last,0);
+sl.max=last;sl.value=0;const show=i=>{d3.select("#t2").text("Over time: "+fmt(i));paint(m2,i,300);sl.value=i};show(0);
+sl.oninput=()=>show(+sl.value);let tm=null;
+play.onclick=()=>{if(tm){clearInterval(tm);tm=null;play.textContent="▶ Play";return}
+ play.textContent="⏸ Pause";if(+sl.value>=last)show(0);
+ tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},800)};
+const lg=d3.select("#lg"),g=lg.append("defs").append("linearGradient").attr("id","gr");
+d3.range(0,1.01,.1).forEach(t=>g.append("stop").attr("offset",t).attr("stop-color",d3.interpolateRdBu(t)));
+lg.append("rect").attr("x",20).attr("y",4).attr("width",380).attr("height",12).attr("fill","url(#gr)");
+[["More Democratic",20,"start"],["No change",210,"middle"],["More Republican",400,"end"]].forEach(([t,x,a])=>lg.append("text").attr("x",x).attr("y",34).attr("text-anchor",a).attr("font-size",12).text(t));
+lg.append("text").attr("x",20).attr("y",28).attr("font-size",10).text(`−${MAX}`);lg.append("text").attr("x",400).attr("y",28).attr("text-anchor","end").attr("font-size",10).text(`+${MAX}`);
+})();
+</script></body></html>
