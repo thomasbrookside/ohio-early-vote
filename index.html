@@ -32,7 +32,7 @@ const tip=d3.select("#tip");
 const [us,base,ts]=await Promise.all([d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json"),
  d3.json("data/baseline_2024.json"),d3.json("data/timeseries.json")]);
 const dates=ts.dates,snaps=dates.map((d,i)=>({counties:Object.fromEntries(Object.entries(ts.counties).map(([n,c])=>[n,{gop:c.gop[i],dem:c.dem[i],una:c.una[i]}]))}));
-const START_INDEX = dates.indexOf("2026-10-05");
+const START_INDEX = Math.max(0, dates.indexOf("2026-10-05"));
 const feats=topojson.feature(us,us.objects.counties).features.filter(f=>String(f.id).startsWith("39"));
 const proj=d3.geoMercator().fitSize([500,500],{type:"FeatureCollection",features:feats}),path=d3.geoPath(proj);
 const p2=c=>c.gop+c.dem?c.gop/(c.gop+c.dem):null, B=base.counties;
