@@ -32,7 +32,7 @@ const tip=d3.select("#tip");
 const [us,base,ts]=await Promise.all([d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json"),
  d3.json("data/baseline_2024.json"),d3.json("data/timeseries.json")]);
 const dates=ts.dates,snaps=dates.map((d,i)=>({counties:Object.fromEntries(Object.entries(ts.counties).map(([n,c])=>[n,{gop:c.gop[i],dem:c.dem[i],una:c.una[i]}]))}));
-
+const START_INDEX = dates.indexOf("2026-10-05");
 const feats=topojson.feature(us,us.objects.counties).features.filter(f=>String(f.id).startsWith("39"));
 const proj=d3.geoMercator().fitSize([500,500],{type:"FeatureCollection",features:feats}),path=d3.geoPath(proj);
 const p2=c=>c.gop+c.dem?c.gop/(c.gop+c.dem):null, B=base.counties;
@@ -46,10 +46,10 @@ function paint(sel,i,t){const s=snaps[i];sel.transition().duration(t).attr("fill
 const sl=document.getElementById("sl"),fmt=i=>dates[i]+(i===snaps.length-1?" (file as of "+ts.asof.slice(0,16).replace("T"," ")+" UTC)":"");
 const m1=init("#m1"),m2=init("#m2"),last=snaps.length-1;
 d3.select("#t1").text("Current: "+fmt(last));paint(m1,last,0);
-sl.max=last;sl.value=0;const show=i=>{d3.select("#t2").text("Over time: "+fmt(i));paint(m2,i,300);sl.value=i};show(0);
+sl.max=last;sl.value=START_INDEX;const show=i=>{d3.select("#t2").text("Over time: "+fmt(i));paint(m2,i,300);sl.value=i};show(START_INDEX);
 sl.oninput=()=>show(+sl.value);let tm=null;
 play.onclick=()=>{if(tm){clearInterval(tm);tm=null;play.textContent="▶ Play";return}
- play.textContent="⏸ Pause";if(+sl.value>=last)show(0);
+ play.textContent="⏸ Pause";if(+sl.value>=last)show(START_INDEX);
  tm=setInterval(()=>{if(+sl.value>=last){clearInterval(tm);tm=null;play.textContent="▶ Play"}else show(+sl.value+1)},1600)};
 
 const lg = d3.select("#lg");
