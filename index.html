@@ -38,11 +38,26 @@ const START_INDEX = fi < 0 ? dates.length - 1 : fi;
 const feats=topojson.feature(us,us.objects.counties).features.filter(f=>String(f.id).startsWith("39"));
 const proj=d3.geoMercator().fitSize([500,500],{type:"FeatureCollection",features:feats}),path=d3.geoPath(proj);
 const p2=c=>c.gop+c.dem?c.gop/(c.gop+c.dem):null, B=base.counties;
-function shift(s,n){const c=s.counties[n],b=B[n];return !c||c.gop+c.dem<MIN_TOTAL?null:(p2(c)-p2(b))*100}
+function shift(s,n) {
+  const c = s.counties[n], b = B[n];
+  if (!c || !b) return null;
+
+  const total = c.gop + c.dem + c.una;
+  if (total < MIN_TOTAL) return null;
+
+  return (pAll(c) - pAll(b)) * 100;
+}
 function init(id){const svg=d3.select(id).attr("viewBox","0 0 500 500");
  return svg.selectAll("path").data(feats).join("path").attr("d",path)
  .on("mousemove",(e,f)=>{const i=id==="#m1"?snaps.length-1:+sl.value,s=snaps[i],n=f.properties.name,c=s.counties[n],b=B[n],x=shift(s,n);
-  tip.style("display","block").style("left",e.clientX+12+"px").style("top",e.clientY+12+"px").html(`<b>${n}</b><br>2024 GOP 2-party: ${(p2(b)*100).toFixed(1)}%<br>Now: ${c&&p2(c)!=null?(p2(c)*100).toFixed(1)+"%":"–"}<br>Shift: ${x==null?"insufficient data":(x>0?"+":"")+x.toFixed(1)+" pts"}<br>R ${c?.gop??0} · D ${c?.dem??0}`)})
+  tip.style("display","block")
+  .style("left",e.clientX+12+"px")
+  .style("top",e.clientY+12+"px")
+  .html(`<b>${n}</b><br>
+    2024 GOP share (all ballots): ${pAll(b)!=null?(pAll(b)*100).toFixed(1)+"%":"–"}<br>
+    Now: ${c&&pAll(c)!=null?(pAll(c)*100).toFixed(1)+"%":"–"}<br>
+    Shift: ${x==null?"insufficient data":(x>0?"+":"")+x.toFixed(1)+" pts"}<br>
+    R ${c?.gop??0} · D ${c?.dem??0} · Unaffiliated ${c?.una??0}`)
  .on("mouseleave",()=>tip.style("display","none"))}
 function paint(sel,i,t){const s=snaps[i];sel.transition().duration(t).attr("fill",f=>col(shift(s,f.properties.name)))}
 const sl=document.getElementById("sl"),fmt=i=>dates[i]+(i===snaps.length-1?" (file as of "+ts.asof.slice(0,16).replace("T"," ")+" UTC)":"");
